@@ -1352,8 +1352,8 @@ ssl_tls_write(struct ssl_tls *tls, const char *data, int length)
 
         switch (SSL_get_error(tls->ssl, status))
         {
-            LOG(LOG_LEVEL_ERROR, "SSL failed to send data. Length: %d", length)
-            
+            LOG(LOG_LEVEL_ERROR, "SSL failed to send data. Length: %d", length);
+
             case SSL_ERROR_NONE:
                 break_flag = 1;
                 break;
