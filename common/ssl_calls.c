@@ -1350,7 +1350,7 @@ ssl_tls_write(struct ssl_tls *tls, const char *data, int length)
     {
         status = SSL_write(tls->ssl, data, length);
 
-        LOG(LOG_LEVEL_TRACE, "SSL attempt to send data. Length: %d; strlen(data): %d; Error code: %d", length, strlen(data), SSL_get_error(tls->ssl, status));
+        LOG(LOG_LEVEL_TRACE, "SSL attempt to send data. Length: %d; Error code: %d", length, SSL_get_error(tls->ssl, status));
 
         switch (SSL_get_error(tls->ssl, status))
         {
