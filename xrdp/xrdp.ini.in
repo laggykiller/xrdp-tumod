@@ -3,7 +3,7 @@
 ini_version=1
 
 ; fork a new process for each incoming connection
-fork=true
+fork=false
 
 ; ports to listen on, number alone means listen on all interfaces
 ; 0.0.0.0 or :: if ipv6 is configured
@@ -55,7 +55,7 @@ key_file=
 
 ; set SSL protocols
 ; can be comma separated list of 'SSLv3', 'TLSv1', 'TLSv1.1', 'TLSv1.2', 'TLSv1.3'
-ssl_protocols=TLSv1.2, TLSv1.3
+ssl_protocols=SSLv3, TLSv1, TLSv1.1, TLSv1.2, TLSv1.3
 ; set TLS cipher suites
 #tls_ciphers=HIGH
 
@@ -196,8 +196,8 @@ LogFile=xrdp.log
 LogLevel=INFO
 EnableSyslog=true
 #SyslogLevel=INFO
-#EnableConsole=false
-#ConsoleLevel=INFO
+EnableConsole=true
+ConsoleLevel=TRACE
 #EnableProcessId=false
 
 [LoggingPerLogger]
