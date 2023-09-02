@@ -1350,7 +1350,7 @@ ssl_tls_write(struct ssl_tls *tls, const char *data, int length)
     {
         status = SSL_write(tls->ssl, data, length);
 
-        LOG(LOG_LEVEL_TRACE, "SSL attempt to send data. Length: %d", length);   
+        LOG(LOG_LEVEL_TRACE, "SSL attempt to send data. Length: %d; Error code: %d", length, SSL_get_error(tls->ssl, status));
 
         switch (SSL_get_error(tls->ssl, status))
         {
@@ -1364,9 +1364,11 @@ ssl_tls_write(struct ssl_tls *tls, const char *data, int length)
              *     SSL_ERROR_WANT_WRITE
              */
             case SSL_ERROR_WANT_READ:
+                LOG(LOG_LEVEL_TRACE, "SSL_ERROR_WANT_READ occured");   
                 g_sck_can_recv(tls->trans->sck, SSL_WANT_READ_WRITE_TIMEOUT);
                 continue;
             case SSL_ERROR_WANT_WRITE:
+                LOG(LOG_LEVEL_TRACE, "SSL_ERROR_WANT_WRITE occured");
                 g_sck_can_send(tls->trans->sck, SSL_WANT_READ_WRITE_TIMEOUT);
                 continue;
 
